@@ -1,0 +1,4 @@
+requests
+pandas
+arrow
+socketIO-client-nexus
