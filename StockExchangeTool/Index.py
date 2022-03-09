@@ -1,7 +1,9 @@
 import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
+from datetime import date
 import matplotlib.pyplot as plt
+import investpy
 
 class Index:
 
@@ -14,17 +16,16 @@ class Index:
         self.annual_return = float
         self.variance = float
         self.data = pd.DataFrame()
-        self.simple_returns = []
-        self.log_returns = []
+        self.simple_returns = pd.DataFrame
+        self.log_returns = pd.DataFrame
         self.symbol = symbol
         self.set_data()
         self.set_simple_return()
-        self.set_log_returns
-        self.set_annual_return                  # Decided to use log returns for annual return of individual stocks and simple return for portfolio
+        self.set_log_returns()
+        self.set_annual_return()                  # Decided to use log returns for annual return of individual stocks and simple return for portfolio
         self.price = self.get_price()
-        self.stdev = self.get_stdev()
-        self.variance = self.get_variance()
-
+        self.set_stdev()
+        self.set_variance()
 
 
 
@@ -56,7 +57,8 @@ class Index:
         self.symbol = symbol
 
     def set_data(self):
-        self.data['Adj Close'] = wb.DataReader(self.get_symbol(), data_source='yahoo', start='2015-1-1')['Adj Close']
+        self.data['Adj Close'] = investpy.get_index_historical_data(index=self.get_symbol(), country='Romania', from_date='01/01/2015', to_date=date.today().strftime('%d/%m/%Y'))['Close']
+        #self.data['Adj Close'] = wb.DataReader(self.get_symbol(), data_source='yahoo', start='2016-1-1')['Adj Close']
         self.data['Simple Return'] = ((self.data['Adj Close'] / self.data['Adj Close'].shift(1)) - 1)
         self.data['Log Return'] = np.log(self.data['Adj Close'] / self.data['Adj Close'].shift(1))
 

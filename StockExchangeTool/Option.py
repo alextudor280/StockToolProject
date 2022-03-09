@@ -2,10 +2,11 @@ import pandas as pd
 import numpy as np
 from scipy.stats import norm
 import Stock
+import investpy
 
 class Option:
 
-    rf = 0.025
+    rf = 0.035
 
     def __init__(self, stock, strike, maturity):
         self.price = float

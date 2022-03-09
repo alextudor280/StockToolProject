@@ -6,18 +6,18 @@ from scipy.stats import norm
 
 rf = 0.025
 t = 1.0
-t_intervals = 252
+t_intervals = 250
 delta_t = t / t_intervals
 iterations = 10000
 
-symbol = 'PG'
+symbol = 'FB'
 data = pd.DataFrame()
 data[symbol] = wb.DataReader(symbol, data_source = 'yahoo', start = '2007-1-1')['Adj Close']
 
 
 
 log_returns = np.log(1 + data.pct_change())
-stdev = log_returns.std() * 252 ** 0.5
+stdev = log_returns.std() * 250 ** 0.5
 stdev = stdev.values
 
 z = np.random.standard_normal((t_intervals + 1, iterations))
@@ -33,7 +33,7 @@ plt.plot(s[:, :10])
 plt.show()
 
 #Using the Monte Carlo simulation into call option pricing
-k = 110             #strike price
+k = 205             #strike price
 
 p = np.maximum(s[-1] - k, 0)
 

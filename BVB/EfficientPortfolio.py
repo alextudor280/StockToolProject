@@ -8,7 +8,7 @@ assets = ['FB', '^GSPC']
 portfolio = pd.DataFrame()
 
 for a in assets:
-    portfolio[a] = wb.DataReader(a, data_source='yahoo', start = '2015-1-1' )['Adj Close']
+    portfolio[a] = wb.DataReader(a, data_source='yahoo', start = '2012-1-1' )['Adj Close']
 
 (portfolio / portfolio.iloc[0] * 100).plot(figsize=(10,5))
 plt.show()

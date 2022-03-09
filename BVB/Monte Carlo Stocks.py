@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from pandas_datareader import data as wb
 from scipy.stats import norm
 
-symbol = 'PG'
+symbol = 'HBT'
 data = pd.DataFrame()
 data[symbol] = wb.DataReader(symbol, data_source = 'yahoo', start = '2007-1-1')['Adj Close']
 
@@ -39,7 +39,7 @@ np.array(stdev)
 #x = np.random.rand(10, 2) This creates random numbers for the probability, also arranged in a 10 by 2 array
 
 t_intervals = 1000      #forecasting the stock price for 1000 days
-iterations = 10         #the number of predictions per day
+iterations = 50         #the number of predictions per day
 
 z = norm.ppf(np.random.rand(t_intervals, iterations))
 
